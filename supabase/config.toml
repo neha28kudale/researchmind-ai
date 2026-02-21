@@ -1,0 +1,16 @@
+project_id = "iqgweychfvhimylufwpw"
+
+[functions.fetch-papers]
+verify_jwt = false
+
+[functions.rank-papers]
+verify_jwt = false
+
+[functions.analyze-papers]
+verify_jwt = false
+
+[functions.generate-report]
+verify_jwt = false
+
+[functions.devils-advocate]
+verify_jwt = false
