@@ -8,6 +8,7 @@ import { PaperCard, type Paper } from "@/components/PaperCard";
 import { AnalysisPanel, type AnalysisResult } from "@/components/AnalysisPanel";
 import { ReportViewer } from "@/components/ReportViewer";
 import { DevilsAdvocatePanel } from "@/components/DevilsAdvocatePanel";
+import { ConfidenceCard } from "@/components/ConfidenceCard";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -152,7 +153,12 @@ export default function Index() {
         {analysis && (
           <section className="space-y-3">
             <h3 className="text-lg font-semibold">AI Analysis</h3>
-            <AnalysisPanel analysis={analysis} />
+            <div className="grid gap-4 lg:grid-cols-3">
+              <div className="lg:col-span-2">
+                <AnalysisPanel analysis={analysis} />
+              </div>
+              <ConfidenceCard papers={rankedPapers.length > 0 ? rankedPapers : papers} analysis={analysis} />
+            </div>
           </section>
         )}
 
