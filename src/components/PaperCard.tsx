@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Youtube } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -12,6 +12,7 @@ export interface Paper {
   url: string;
   source: "arxiv" | "semantic_scholar";
   relevance_score?: number;
+  youtube_url?: string;
 }
 
 interface PaperCardProps {
@@ -33,9 +34,16 @@ export function PaperCard({ paper, rank, highlighted }: PaperCardProps) {
             )}
             <CardTitle className="text-sm leading-snug">{paper.title}</CardTitle>
           </div>
-          <a href={paper.url} target="_blank" rel="noopener noreferrer" className="shrink-0 text-muted-foreground hover:text-foreground">
-            <ExternalLink className="h-4 w-4" />
-          </a>
+          <div className="flex shrink-0 gap-1.5">
+            {paper.youtube_url && (
+              <a href={paper.youtube_url} target="_blank" rel="noopener noreferrer" className="text-destructive hover:text-destructive/80" title="Search on YouTube">
+                <Youtube className="h-4 w-4" />
+              </a>
+            )}
+            <a href={paper.url} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground" title="View paper">
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-2">

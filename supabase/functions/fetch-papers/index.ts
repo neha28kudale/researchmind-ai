@@ -34,7 +34,21 @@ serve(async (req) => {
       source: "semantic_scholar",
     }));
 
-    const papers = [...arxivPapers, ...ssPapers];
+    const allPapers = [...arxivPapers, ...ssPapers];
+
+    // Search YouTube for related videos
+    const ytSearchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(topic + " research paper explained")}`;
+    
+    // Add YouTube search links per paper title
+    const papers = await Promise.all(
+      allPapers.map(async (p: any) => {
+        const ytQuery = encodeURIComponent(p.title);
+        return {
+          ...p,
+          youtube_url: `https://www.youtube.com/results?search_query=${ytQuery}`,
+        };
+      })
+    );
 
     return new Response(JSON.stringify({ papers }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
